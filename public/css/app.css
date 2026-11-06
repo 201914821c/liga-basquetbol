@@ -1,0 +1,241 @@
+:root {
+    --liga-orange: #f97316;
+    --liga-orange-dark: #ea580c;
+    --liga-yellow: #facc15;
+    --liga-navy: #0f172a;
+    --liga-navy-soft: #1e293b;
+    --liga-slate: #64748b;
+    --liga-surface: #f8fafc;
+}
+
+body {
+    min-height: 100vh;
+    color: #1e293b;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        radial-gradient(circle at 0% 0%, #fff7ed 0, transparent 38%),
+        radial-gradient(circle at 100% 100%, #eff6ff 0, transparent 38%),
+        var(--liga-surface);
+}
+
+/* Navbar */
+.navbar-liga {
+    background: linear-gradient(120deg, #0f172a 0%, #1e293b 62%, #7c2d12 100%);
+    border-bottom: 3px solid var(--liga-orange);
+    box-shadow: 0 6px 24px rgba(15, 23, 42, .28);
+}
+
+.navbar-liga .navbar-brand {
+    font-weight: 800;
+    letter-spacing: .4px;
+    color: #fff;
+}
+
+.navbar-liga .nav-link {
+    color: rgba(255, 255, 255, .78);
+    font-weight: 500;
+    border-radius: .55rem;
+    padding: .45rem .75rem;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+.navbar-liga .nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .09);
+}
+
+.navbar-liga .nav-link.active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--liga-orange), var(--liga-orange-dark));
+    box-shadow: 0 4px 12px rgba(249, 115, 22, .35);
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--liga-orange), var(--liga-orange-dark));
+    border: 0;
+    box-shadow: 0 6px 16px rgba(249, 115, 22, .32);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(135deg, var(--liga-orange-dark), #c2410c);
+    box-shadow: 0 8px 20px rgba(234, 88, 12, .38);
+}
+
+.btn-outline-primary {
+    color: var(--liga-orange-dark);
+    border-color: var(--liga-orange);
+}
+
+.btn-outline-primary:hover {
+    background: var(--liga-orange);
+    border-color: var(--liga-orange);
+    color: #fff;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    border: 0;
+}
+
+/* Cards */
+.card {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .09);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.section-title,
+h1.h3 {
+    font-weight: 800;
+    color: var(--liga-navy);
+    letter-spacing: -.01em;
+}
+
+/* Tables */
+.table thead th {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: .74rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table-hover tbody tr:hover {
+    background: #fff7ed;
+}
+
+.table-success {
+    --bs-table-bg: #fff7ed;
+    --bs-table-border-color: #fed7aa;
+}
+
+/* Badges */
+.badge {
+    border-radius: 999px;
+    padding: .42em .72em;
+    font-weight: 600;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.35rem;
+    color: #fff;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    background-image: url("../img/hero-basketball.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 24px 45px rgba(15, 23, 42, .28);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(15, 23, 42, .94) 5%, rgba(15, 23, 42, .62) 55%, rgba(249, 115, 22, .42) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 2.4rem;
+}
+
+.hero h1 {
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+
+.hero .lead {
+    color: rgba(255, 255, 255, .85);
+}
+
+/* Stat cards */
+.stat-card .stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    background: #fff7ed;
+    color: var(--liga-orange-dark);
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--liga-navy);
+}
+
+/* Auth */
+.auth-page {
+    min-height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.auth-card {
+    overflow: hidden;
+    border-radius: 1.35rem;
+    box-shadow: 0 30px 60px rgba(15, 23, 42, .18);
+}
+
+.auth-visual {
+    background-image: linear-gradient(180deg, rgba(15, 23, 42, .35), rgba(15, 23, 42, .92)), url("../img/court.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 420px;
+}
+
+.auth-visual h2 {
+    font-weight: 800;
+}
+
+.auth-visual p {
+    color: rgba(255, 255, 255, .82);
+}
+
+.auth-form {
+    padding: 2.75rem;
+}
+
+/* Footer */
+.footer-liga {
+    background: var(--liga-navy);
+    color: #94a3b8;
+    padding: 1.6rem 0;
+    margin-top: 3rem;
+}
+
+.footer-liga strong {
+    color: #fff;
+}
+
+.footer-liga .bi {
+    color: var(--liga-orange);
+}
+
+@media (max-width: 991.98px) {
+    .auth-visual {
+        min-height: 220px;
+    }
+}
