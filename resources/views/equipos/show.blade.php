@@ -31,4 +31,61 @@
             </dl>
         </div>
     </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+        <h2 class="h5 mb-0">Jugadores ({{ $equipo->jugadores->count() }})</h2>
+        <a href="{{ route('jugadores.create', ['equipo_id' => $equipo->id]) }}" class="btn btn-sm btn-primary">
+            Agregar jugador
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if ($equipo->jugadores->isEmpty())
+                <p class="text-muted mb-0">Este equipo todavía no tiene jugadores registrados.</p>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Jugador</th>
+                                <th>Dorsal</th>
+                                <th>Posición</th>
+                                <th>Altura</th>
+                                <th>Estado</th>
+                                <th class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($equipo->jugadores as $jugador)
+                                <tr>
+                                    <td class="fw-semibold">{{ $jugador->apellido }}, {{ $jugador->nombre }}</td>
+                                    <td>{{ $jugador->dorsal }}</td>
+                                    <td>{{ $jugador->posicion }}</td>
+                                    <td>{{ $jugador->altura ? $jugador->altura.' m' : '—' }}</td>
+                                    <td>
+                                        @if ($jugador->activo)
+                                            <span class="badge bg-success">Activo</span>
+                                        @else
+                                            <span class="badge bg-secondary">Inactivo</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="{{ route('jugadores.show', $jugador) }}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                        <a href="{{ route('jugadores.edit', $jugador) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <form action="{{ route('jugadores.destroy', $jugador) }}" method="POST" class="d-inline"
+                                              onsubmit="return confirm('¿Eliminar a {{ $jugador->nombre_completo }}?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+    </div>
 @endsection
