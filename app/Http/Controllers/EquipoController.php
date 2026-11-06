@@ -63,6 +63,11 @@ class EquipoController extends Controller
 
     public function destroy(Equipo $equipo)
     {
+        if ($equipo->partidosLocal()->exists() || $equipo->partidosVisitante()->exists()) {
+            return redirect()->route('equipos.index')
+                ->with('error', 'No se puede eliminar un equipo que tiene partidos registrados.');
+        }
+
         $equipo->delete();
 
         return redirect()->route('equipos.index')
