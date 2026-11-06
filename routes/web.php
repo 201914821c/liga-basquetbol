@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\EstadisticaController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartidoController;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +27,8 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/estadisticas', [EstadisticaController::class, 'index'])->name('estadisticas.index');
 
     Route::resource('equipos', EquipoController::class);
     Route::resource('jugadores', JugadorController::class)
