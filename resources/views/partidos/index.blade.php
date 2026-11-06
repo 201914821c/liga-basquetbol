@@ -66,8 +66,22 @@
                             @foreach ($partidos as $partido)
                                 <tr>
                                     <td>{{ $partido->fecha->format('d/m/Y H:i') }}</td>
-                                    <td class="fw-semibold">{{ $partido->equipoLocal->nombre }}</td>
-                                    <td class="fw-semibold">{{ $partido->equipoVisitante->nombre }}</td>
+                                    <td class="fw-semibold">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{{ $partido->equipoLocal->escudo_url }}"
+                                                 alt="Escudo de {{ $partido->equipoLocal->nombre }}"
+                                                 class="team-escudo escudo-sm">
+                                            <span>{{ $partido->equipoLocal->nombre }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="fw-semibold">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{{ $partido->equipoVisitante->escudo_url }}"
+                                                 alt="Escudo de {{ $partido->equipoVisitante->nombre }}"
+                                                 class="team-escudo escudo-sm">
+                                            <span>{{ $partido->equipoVisitante->nombre }}</span>
+                                        </div>
+                                    </td>
                                     <td>
                                         @if ($partido->estaFinalizado())
                                             {{ $partido->puntos_local }} - {{ $partido->puntos_visitante }}

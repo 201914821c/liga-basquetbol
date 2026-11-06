@@ -35,7 +35,13 @@
                             @foreach ($equipos as $equipo)
                                 <tr>
                                     <td>{{ $equipo->id }}</td>
-                                    <td class="fw-semibold">{{ $equipo->nombre }}</td>
+                                    <td class="fw-semibold">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{{ $equipo->escudo_url }}" alt="Escudo de {{ $equipo->nombre }}"
+                                                 class="team-escudo escudo-sm">
+                                            <span>{{ $equipo->nombre }}</span>
+                                        </div>
+                                    </td>
                                     <td>{{ $equipo->ciudad ?? '—' }}</td>
                                     <td>{{ $equipo->entrenador ?? '—' }}</td>
                                     <td>{{ $equipo->anio_fundacion ?? '—' }}</td>

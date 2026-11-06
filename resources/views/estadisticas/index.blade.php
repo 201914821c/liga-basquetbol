@@ -80,7 +80,12 @@
                                 <tr class="{{ $posicion === 0 ? 'table-success' : '' }}">
                                     <td>{{ $posicion + 1 }}</td>
                                     <td class="fw-semibold">
-                                        <a href="{{ route('equipos.show', $fila['equipo']) }}">{{ $fila['equipo']->nombre }}</a>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{{ $fila['equipo']->escudo_url }}"
+                                                 alt="Escudo de {{ $fila['equipo']->nombre }}"
+                                                 class="team-escudo escudo-sm">
+                                            <a href="{{ route('equipos.show', $fila['equipo']) }}">{{ $fila['equipo']->nombre }}</a>
+                                        </div>
                                     </td>
                                     <td class="text-center">{{ $fila['pj'] }}</td>
                                     <td class="text-center">{{ $fila['pg'] }}</td>

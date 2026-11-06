@@ -13,10 +13,10 @@ class DemoSeeder extends Seeder
     public function run(): void
     {
         $equipos = [
-            ['nombre' => 'Tigres de Lima', 'ciudad' => 'Lima', 'entrenador' => 'Carlos Ramírez', 'anio_fundacion' => 2005],
-            ['nombre' => 'Águilas del Sur', 'ciudad' => 'Arequipa', 'entrenador' => 'Marco Díaz', 'anio_fundacion' => 2010],
-            ['nombre' => 'Lobos de Trujillo', 'ciudad' => 'Trujillo', 'entrenador' => 'Jorge Salas', 'anio_fundacion' => 2008],
-            ['nombre' => 'Halcones de Cusco', 'ciudad' => 'Cusco', 'entrenador' => 'Percy Quispe', 'anio_fundacion' => 2012],
+            ['nombre' => 'Tigres de Lima', 'escudo' => 'tigres.svg', 'ciudad' => 'Lima', 'entrenador' => 'Carlos Ramírez', 'anio_fundacion' => 2005],
+            ['nombre' => 'Águilas del Sur', 'escudo' => 'aguilas.svg', 'ciudad' => 'Arequipa', 'entrenador' => 'Marco Díaz', 'anio_fundacion' => 2010],
+            ['nombre' => 'Lobos de Trujillo', 'escudo' => 'lobos.svg', 'ciudad' => 'Trujillo', 'entrenador' => 'Jorge Salas', 'anio_fundacion' => 2008],
+            ['nombre' => 'Halcones de Cusco', 'escudo' => 'halcones.svg', 'ciudad' => 'Cusco', 'entrenador' => 'Percy Quispe', 'anio_fundacion' => 2012],
         ];
 
         $equiposCreados = [];

@@ -13,10 +13,20 @@ class Equipo extends Model
 
     protected $fillable = [
         'nombre',
+        'escudo',
         'ciudad',
         'entrenador',
         'anio_fundacion',
     ];
+
+    public function getEscudoUrlAttribute(): string
+    {
+        if ($this->escudo && is_file(public_path('escudos/'.$this->escudo))) {
+            return asset('escudos/'.$this->escudo);
+        }
+
+        return asset('img/logo.svg');
+    }
 
     public function jugadores()
     {

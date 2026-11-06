@@ -5,10 +5,18 @@
 @section('content')
     <div class="mb-4">
         <h1 class="h3 mb-1">Registrar resultado</h1>
-        <p class="text-muted mb-0">
-            {{ $partido->equipoLocal->nombre }} vs. {{ $partido->equipoVisitante->nombre }}
-            — {{ $partido->fecha->format('d/m/Y H:i') }}
-        </p>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <img src="{{ $partido->equipoLocal->escudo_url }}"
+                 alt="Escudo de {{ $partido->equipoLocal->nombre }}"
+                 class="team-escudo escudo-sm">
+            <span class="fw-semibold">{{ $partido->equipoLocal->nombre }}</span>
+            <span class="text-muted">vs.</span>
+            <img src="{{ $partido->equipoVisitante->escudo_url }}"
+                 alt="Escudo de {{ $partido->equipoVisitante->nombre }}"
+                 class="team-escudo escudo-sm">
+            <span class="fw-semibold">{{ $partido->equipoVisitante->nombre }}</span>
+            <span class="text-muted">— {{ $partido->fecha->format('d/m/Y H:i') }}</span>
+        </div>
     </div>
 
     <div class="card shadow-sm">
@@ -50,7 +58,9 @@
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-success">Guardar resultado</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check2-circle me-1"></i>Guardar resultado
+                    </button>
                     <a href="{{ route('partidos.show', $partido) }}" class="btn btn-outline-secondary">Cancelar</a>
                 </div>
             </form>

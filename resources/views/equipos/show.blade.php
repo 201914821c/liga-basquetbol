@@ -3,13 +3,18 @@
 @section('title', $equipo->nombre)
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 mb-1">{{ $equipo->nombre }}</h1>
-            <p class="text-muted mb-0">Detalle del equipo.</p>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <img src="{{ $equipo->escudo_url }}" alt="Escudo de {{ $equipo->nombre }}" class="team-escudo escudo-lg">
+            <div>
+                <h1 class="h3 mb-1">{{ $equipo->nombre }}</h1>
+                <p class="text-muted mb-0">Detalle del equipo.</p>
+            </div>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('equipos.edit', $equipo) }}" class="btn btn-primary">Editar</a>
+            <a href="{{ route('equipos.edit', $equipo) }}" class="btn btn-primary">
+                <i class="bi bi-pencil-square me-1"></i>Editar
+            </a>
             <a href="{{ route('equipos.index') }}" class="btn btn-outline-secondary">Volver</a>
         </div>
     </div>

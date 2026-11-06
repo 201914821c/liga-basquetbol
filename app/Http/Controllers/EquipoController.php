@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class EquipoController extends Controller
 {
@@ -23,10 +24,15 @@ class EquipoController extends Controller
     {
         $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'unique:equipos,nombre'],
+            'escudo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
             'ciudad' => ['nullable', 'string', 'max:100'],
             'entrenador' => ['nullable', 'string', 'max:100'],
             'anio_fundacion' => ['nullable', 'integer', 'min:1900', 'max:'.date('Y')],
         ]);
+
+        if ($request->hasFile('escudo')) {
+            $data['escudo'] = $this->guardarEscudo($request);
+        }
 
         Equipo::create($data);
 
@@ -50,10 +56,19 @@ class EquipoController extends Controller
     {
         $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'unique:equipos,nombre,'.$equipo->id],
+            'escudo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
             'ciudad' => ['nullable', 'string', 'max:100'],
             'entrenador' => ['nullable', 'string', 'max:100'],
             'anio_fundacion' => ['nullable', 'integer', 'min:1900', 'max:'.date('Y')],
         ]);
+
+        if ($request->hasFile('escudo')) {
+            $this->eliminarEscudo($equipo);
+            $data['escudo'] = $this->guardarEscudo($request);
+        } elseif ($request->boolean('quitar_escudo')) {
+            $this->eliminarEscudo($equipo);
+            $data['escudo'] = null;
+        }
 
         $equipo->update($data);
 
@@ -68,9 +83,32 @@ class EquipoController extends Controller
                 ->with('error', 'No se puede eliminar un equipo que tiene partidos registrados.');
         }
 
+        $this->eliminarEscudo($equipo);
         $equipo->delete();
 
         return redirect()->route('equipos.index')
             ->with('success', 'El equipo fue eliminado correctamente.');
+    }
+
+    private function guardarEscudo(Request $request): string
+    {
+        $archivo = $request->file('escudo');
+        $nombre = $archivo->hashName();
+        $archivo->move(public_path('escudos'), $nombre);
+
+        return $nombre;
+    }
+
+    private function eliminarEscudo(Equipo $equipo): void
+    {
+        if (! $equipo->escudo) {
+            return;
+        }
+
+        $ruta = public_path('escudos/'.$equipo->escudo);
+
+        if (File::exists($ruta)) {
+            File::delete($ruta);
+        }
     }
 }

@@ -64,9 +64,14 @@
                                 <tr>
                                     <td class="fw-semibold">{{ $jugador->apellido }}, {{ $jugador->nombre }}</td>
                                     <td>
-                                        <a href="{{ route('equipos.show', $jugador->equipo) }}">
-                                            {{ $jugador->equipo->nombre }}
-                                        </a>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{{ $jugador->equipo->escudo_url }}"
+                                                 alt="Escudo de {{ $jugador->equipo->nombre }}"
+                                                 class="team-escudo escudo-sm">
+                                            <a href="{{ route('equipos.show', $jugador->equipo) }}">
+                                                {{ $jugador->equipo->nombre }}
+                                            </a>
+                                        </div>
                                     </td>
                                     <td>{{ $jugador->dorsal }}</td>
                                     <td>{{ $jugador->posicion }}</td>
