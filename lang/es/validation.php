@@ -1,0 +1,48 @@
+<?php
+
+return [
+    'accepted' => 'El campo :attribute debe ser aceptado.',
+    'boolean' => 'El campo :attribute debe ser verdadero o falso.',
+    'confirmed' => 'La confirmación de :attribute no coincide.',
+    'date' => 'El campo :attribute debe ser una fecha válida.',
+    'different' => 'Los campos :attribute y :other deben ser diferentes.',
+    'email' => 'El campo :attribute debe ser una dirección de correo válida.',
+    'exists' => 'El valor seleccionado en :attribute no es válido.',
+    'in' => 'El valor seleccionado en :attribute no es válido.',
+    'integer' => 'El campo :attribute debe ser un número entero.',
+    'max' => [
+        'numeric' => 'El campo :attribute no debe ser mayor que :max.',
+        'string' => 'El campo :attribute no debe tener más de :max caracteres.',
+    ],
+    'min' => [
+        'numeric' => 'El campo :attribute debe ser al menos :min.',
+        'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+    ],
+    'numeric' => 'El campo :attribute debe ser un número.',
+    'required' => 'El campo :attribute es obligatorio.',
+    'string' => 'El campo :attribute debe ser texto.',
+    'unique' => 'El valor del campo :attribute ya está registrado.',
+    'after_or_equal' => 'El campo :attribute debe ser una fecha posterior o igual a :date.',
+
+    'attributes' => [
+        'name' => 'nombre',
+        'email' => 'correo electrónico',
+        'password' => 'contraseña',
+        'nombre' => 'nombre',
+        'ciudad' => 'ciudad',
+        'entrenador' => 'entrenador',
+        'anio_fundacion' => 'año de fundación',
+        'equipo_id' => 'equipo',
+        'apellido' => 'apellido',
+        'dorsal' => 'dorsal',
+        'posicion' => 'posición',
+        'altura' => 'altura',
+        'fecha_nacimiento' => 'fecha de nacimiento',
+        'equipo_local_id' => 'equipo local',
+        'equipo_visitante_id' => 'equipo visitante',
+        'fecha' => 'fecha del partido',
+        'lugar' => 'lugar',
+        'puntos_local' => 'puntos del equipo local',
+        'puntos_visitante' => 'puntos del equipo visitante',
+    ],
+];
