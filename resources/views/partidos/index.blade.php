@@ -8,7 +8,9 @@
             <h1 class="h3 mb-1">Partidos</h1>
             <p class="text-muted mb-0">Calendario y resultados de la liga.</p>
         </div>
-        <a href="{{ route('partidos.create') }}" class="btn btn-primary">Nuevo partido</a>
+        <a href="{{ route('partidos.create') }}" class="btn btn-primary">
+            <i class="bi bi-calendar-plus me-1"></i>Nuevo partido
+        </a>
     </div>
 
     <div class="card shadow-sm mb-4">
@@ -34,7 +36,9 @@
                     </select>
                 </div>
                 <div class="col-md-4 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-funnel me-1"></i>Filtrar
+                    </button>
                     <a href="{{ route('partidos.index') }}" class="btn btn-outline-secondary">Limpiar</a>
                 </div>
             </form>
@@ -79,16 +83,24 @@
                                         @endif
                                     </td>
                                     <td class="text-end">
-                                        <a href="{{ route('partidos.show', $partido) }}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                        <a href="{{ route('partidos.show', $partido) }}" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
                                         @if (! $partido->estaFinalizado())
-                                            <a href="{{ route('partidos.resultado', $partido) }}" class="btn btn-sm btn-outline-success">Resultado</a>
+                                            <a href="{{ route('partidos.resultado', $partido) }}" class="btn btn-sm btn-outline-success">
+                                                <i class="bi bi-clipboard-check"></i>
+                                            </a>
                                         @endif
-                                        <a href="{{ route('partidos.edit', $partido) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <a href="{{ route('partidos.edit', $partido) }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
                                         <form action="{{ route('partidos.destroy', $partido) }}" method="POST" class="d-inline"
                                               onsubmit="return confirm('¿Eliminar este partido?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

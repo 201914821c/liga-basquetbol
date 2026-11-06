@@ -8,39 +8,45 @@
             <h1 class="h3 mb-1">Estadísticas</h1>
             <p class="text-muted mb-0">Tabla de posiciones, resultados y próximos partidos.</p>
         </div>
-        <a href="{{ route('partidos.create') }}" class="btn btn-primary">Nuevo partido</a>
+        <a href="{{ route('partidos.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Nuevo partido
+        </a>
     </div>
 
     <div class="row g-3 mb-4">
         <div class="col-6 col-lg-3">
-            <div class="card shadow-sm h-100">
+            <div class="card stat-card h-100">
                 <div class="card-body">
+                    <div class="stat-icon mb-3"><i class="bi bi-shield-shaded"></i></div>
                     <p class="text-muted mb-1">Equipos</p>
-                    <p class="display-6 mb-0">{{ $totales['equipos'] }}</p>
+                    <p class="stat-value mb-0">{{ $totales['equipos'] }}</p>
                 </div>
             </div>
         </div>
         <div class="col-6 col-lg-3">
-            <div class="card shadow-sm h-100">
+            <div class="card stat-card h-100">
                 <div class="card-body">
+                    <div class="stat-icon mb-3"><i class="bi bi-people"></i></div>
                     <p class="text-muted mb-1">Jugadores</p>
-                    <p class="display-6 mb-0">{{ $totales['jugadores'] }}</p>
+                    <p class="stat-value mb-0">{{ $totales['jugadores'] }}</p>
                 </div>
             </div>
         </div>
         <div class="col-6 col-lg-3">
-            <div class="card shadow-sm h-100">
+            <div class="card stat-card h-100">
                 <div class="card-body">
+                    <div class="stat-icon mb-3"><i class="bi bi-calendar-event"></i></div>
                     <p class="text-muted mb-1">Partidos</p>
-                    <p class="display-6 mb-0">{{ $totales['partidos'] }}</p>
+                    <p class="stat-value mb-0">{{ $totales['partidos'] }}</p>
                 </div>
             </div>
         </div>
         <div class="col-6 col-lg-3">
-            <div class="card shadow-sm h-100">
+            <div class="card stat-card h-100">
                 <div class="card-body">
+                    <div class="stat-icon mb-3"><i class="bi bi-check2-circle"></i></div>
                     <p class="text-muted mb-1">Finalizados</p>
-                    <p class="display-6 mb-0">{{ $totales['finalizados'] }}</p>
+                    <p class="stat-value mb-0">{{ $totales['finalizados'] }}</p>
                 </div>
             </div>
         </div>
@@ -48,7 +54,7 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <h2 class="h5 mb-1">Tabla de posiciones</h2>
+            <h2 class="h5 section-title mb-1">Tabla de posiciones</h2>
             <p class="text-muted small mb-3">2 puntos por victoria y 1 punto por derrota.</p>
 
             @if ($tabla->isEmpty())
