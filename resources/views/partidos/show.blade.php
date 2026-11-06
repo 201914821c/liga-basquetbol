@@ -23,6 +23,9 @@
         <div class="card-body text-center">
             <div class="row align-items-center">
                 <div class="col-5">
+                    <img src="{{ $partido->equipoLocal->escudo_url }}"
+                         alt="Escudo de {{ $partido->equipoLocal->nombre }}"
+                         class="team-escudo escudo-lg mb-2">
                     <h2 class="h4 mb-1">{{ $partido->equipoLocal->nombre }}</h2>
                     <span class="text-muted">Local</span>
                 </div>
@@ -36,6 +39,9 @@
                     @endif
                 </div>
                 <div class="col-5">
+                    <img src="{{ $partido->equipoVisitante->escudo_url }}"
+                         alt="Escudo de {{ $partido->equipoVisitante->nombre }}"
+                         class="team-escudo escudo-lg mb-2">
                     <h2 class="h4 mb-1">{{ $partido->equipoVisitante->nombre }}</h2>
                     <span class="text-muted">Visitante</span>
                 </div>

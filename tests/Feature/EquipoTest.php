@@ -6,6 +6,8 @@ use App\Models\Equipo;
 use App\Models\Partido;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class EquipoTest extends TestCase
@@ -93,5 +95,95 @@ class EquipoTest extends TestCase
 
         $this->actingAs($user)->post('/equipos', ['nombre' => 'Tigres'])
             ->assertSessionHasErrors('nombre');
+    }
+
+    public function test_team_can_be_created_with_escudo(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/equipos', [
+            'nombre' => 'Tigres',
+            'escudo' => UploadedFile::fake()->image('tigre.png', 200, 200),
+        ])->assertRedirect('/equipos');
+
+        $equipo = Equipo::where('nombre', 'Tigres')->firstOrFail();
+        $ruta = public_path('escudos/'.$equipo->escudo);
+
+        try {
+            $this->assertNotNull($equipo->escudo);
+            $this->assertFileExists($ruta);
+        } finally {
+            File::delete($ruta);
+        }
+    }
+
+    public function test_team_escudo_can_be_replaced(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/equipos', [
+            'nombre' => 'Tigres',
+            'escudo' => UploadedFile::fake()->image('tigre.png', 200, 200),
+        ]);
+
+        $equipo = Equipo::where('nombre', 'Tigres')->firstOrFail();
+        $anterior = public_path('escudos/'.$equipo->escudo);
+
+        $this->actingAs($user)->put('/equipos/'.$equipo->id, [
+            'nombre' => 'Tigres',
+            'escudo' => UploadedFile::fake()->image('nuevo.png', 200, 200),
+        ])->assertRedirect('/equipos');
+
+        $equipo->refresh();
+        $nuevo = public_path('escudos/'.$equipo->escudo);
+
+        try {
+            $this->assertFileDoesNotExist($anterior);
+            $this->assertFileExists($nuevo);
+        } finally {
+            File::delete($anterior);
+            File::delete($nuevo);
+        }
+    }
+
+    public function test_team_escudo_can_be_removed(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/equipos', [
+            'nombre' => 'Tigres',
+            'escudo' => UploadedFile::fake()->image('tigre.png', 200, 200),
+        ]);
+
+        $equipo = Equipo::where('nombre', 'Tigres')->firstOrFail();
+        $ruta = public_path('escudos/'.$equipo->escudo);
+
+        $this->actingAs($user)->put('/equipos/'.$equipo->id, [
+            'nombre' => 'Tigres',
+            'quitar_escudo' => '1',
+        ])->assertRedirect('/equipos');
+
+        $equipo->refresh();
+
+        $this->assertNull($equipo->escudo);
+        $this->assertFileDoesNotExist($ruta);
+    }
+
+    public function test_team_escudo_file_is_deleted_with_team(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/equipos', [
+            'nombre' => 'Tigres',
+            'escudo' => UploadedFile::fake()->image('tigre.png', 200, 200),
+        ]);
+
+        $equipo = Equipo::where('nombre', 'Tigres')->firstOrFail();
+        $ruta = public_path('escudos/'.$equipo->escudo);
+
+        $this->actingAs($user)->delete('/equipos/'.$equipo->id)
+            ->assertRedirect('/equipos');
+
+        $this->assertFileDoesNotExist($ruta);
     }
 }

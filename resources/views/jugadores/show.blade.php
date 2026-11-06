@@ -19,7 +19,12 @@
             <dl class="row mb-0">
                 <dt class="col-sm-3">Equipo</dt>
                 <dd class="col-sm-9">
-                    <a href="{{ route('equipos.show', $jugador->equipo) }}">{{ $jugador->equipo->nombre }}</a>
+                    <span class="d-inline-flex align-items-center gap-2">
+                        <img src="{{ $jugador->equipo->escudo_url }}"
+                             alt="Escudo de {{ $jugador->equipo->nombre }}"
+                             class="team-escudo escudo-sm">
+                        <a href="{{ route('equipos.show', $jugador->equipo) }}">{{ $jugador->equipo->nombre }}</a>
+                    </span>
                 </dd>
 
                 <dt class="col-sm-3">Dorsal</dt>

@@ -6,6 +6,7 @@ Aplicación web desarrollada con Laravel para la gestión integral de una liga d
 
 - Registro e inicio de sesión de usuarios.
 - Gestión de equipos (crear, editar, eliminar y consultar).
+- Escudos de equipos con carga de imagen (PNG, JPG o WEBP).
 - Gestión de jugadores por equipo, con validación de dorsal único por equipo.
 - Registro y control de partidos (programados y finalizados).
 - Registro de resultados y cálculo automático de la tabla de posiciones.

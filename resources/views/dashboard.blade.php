@@ -68,11 +68,17 @@
                     @if ($proximoPartido)
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                             <div>
-                                <p class="mb-1 fw-semibold fs-5">
-                                    {{ $proximoPartido->equipoLocal->nombre }}
+                                <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+                                    <img src="{{ $proximoPartido->equipoLocal->escudo_url }}"
+                                         alt="Escudo de {{ $proximoPartido->equipoLocal->nombre }}"
+                                         class="team-escudo escudo-sm">
+                                    <span class="fw-semibold fs-5">{{ $proximoPartido->equipoLocal->nombre }}</span>
                                     <span class="text-muted">vs.</span>
-                                    {{ $proximoPartido->equipoVisitante->nombre }}
-                                </p>
+                                    <img src="{{ $proximoPartido->equipoVisitante->escudo_url }}"
+                                         alt="Escudo de {{ $proximoPartido->equipoVisitante->nombre }}"
+                                         class="team-escudo escudo-sm">
+                                    <span class="fw-semibold fs-5">{{ $proximoPartido->equipoVisitante->nombre }}</span>
+                                </div>
                                 <p class="text-muted mb-0">
                                     <i class="bi bi-calendar3 me-1"></i>{{ $proximoPartido->fecha->format('d/m/Y H:i') }}
                                     @if ($proximoPartido->lugar)

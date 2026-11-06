@@ -8,7 +8,8 @@
     </div>
 @endif
 
-<form method="POST" action="{{ isset($equipo) ? route('equipos.update', $equipo) : route('equipos.store') }}">
+<form method="POST" action="{{ isset($equipo) ? route('equipos.update', $equipo) : route('equipos.store') }}"
+      enctype="multipart/form-data">
     @csrf
     @isset($equipo)
         @method('PUT')
@@ -18,6 +19,28 @@
         <label class="form-label" for="nombre">Nombre del equipo</label>
         <input type="text" id="nombre" name="nombre" class="form-control"
                value="{{ old('nombre', $equipo->nombre ?? '') }}" required>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label" for="escudo">Escudo del equipo</label>
+        <div class="d-flex align-items-center gap-3">
+            <img id="escudo-preview"
+                 src="{{ isset($equipo) ? $equipo->escudo_url : asset('img/logo.svg') }}"
+                 alt="Vista previa del escudo" class="escudo-preview">
+            <div class="flex-grow-1">
+                <input type="file" id="escudo" name="escudo"
+                       class="form-control" accept="image/png,image/jpeg,image/webp">
+                <div class="form-text">PNG, JPG o WEBP. Máximo 2 MB.</div>
+                @isset($equipo)
+                    @if ($equipo->escudo)
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="quitar_escudo" id="quitar_escudo" value="1">
+                            <label class="form-check-label" for="quitar_escudo">Quitar escudo actual</label>
+                        </div>
+                    @endif
+                @endisset
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -40,7 +63,23 @@
     </div>
 
     <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-1"></i>Guardar
+        </button>
         <a href="{{ route('equipos.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     </div>
 </form>
+
+<script>
+    const inputEscudo = document.getElementById('escudo');
+    const previewEscudo = document.getElementById('escudo-preview');
+
+    if (inputEscudo && previewEscudo) {
+        inputEscudo.addEventListener('change', (event) => {
+            const [archivo] = event.target.files;
+            if (archivo) {
+                previewEscudo.src = URL.createObjectURL(archivo);
+            }
+        });
+    }
+</script>
