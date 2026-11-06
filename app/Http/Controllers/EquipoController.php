@@ -9,7 +9,7 @@ class EquipoController extends Controller
 {
     public function index()
     {
-        $equipos = Equipo::orderBy('nombre')->paginate(10);
+        $equipos = Equipo::withCount('jugadores')->orderBy('nombre')->paginate(10);
 
         return view('equipos.index', compact('equipos'));
     }
@@ -36,6 +36,8 @@ class EquipoController extends Controller
 
     public function show(Equipo $equipo)
     {
+        $equipo->load(['jugadores' => fn ($query) => $query->orderBy('apellido')->orderBy('nombre')]);
+
         return view('equipos.show', compact('equipo'));
     }
 

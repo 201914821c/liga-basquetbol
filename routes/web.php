@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\JugadorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,4 +29,6 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::resource('equipos', EquipoController::class);
+    Route::resource('jugadores', JugadorController::class)
+        ->parameters(['jugadores' => 'jugador']);
 });

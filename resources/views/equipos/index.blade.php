@@ -25,6 +25,7 @@
                                 <th>Ciudad</th>
                                 <th>Entrenador</th>
                                 <th>Fundación</th>
+                                <th>Jugadores</th>
                                 <th class="text-end">Acciones</th>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                     <td>{{ $equipo->ciudad ?? '—' }}</td>
                                     <td>{{ $equipo->entrenador ?? '—' }}</td>
                                     <td>{{ $equipo->anio_fundacion ?? '—' }}</td>
+                                    <td>{{ $equipo->jugadores_count }}</td>
                                     <td class="text-end">
                                         <a href="{{ route('equipos.show', $equipo) }}" class="btn btn-sm btn-outline-secondary">Ver</a>
                                         <a href="{{ route('equipos.edit', $equipo) }}" class="btn btn-sm btn-outline-primary">Editar</a>
