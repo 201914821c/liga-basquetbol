@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\JugadorController;
+use App\Http\Controllers\PartidoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,4 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('equipos', EquipoController::class);
     Route::resource('jugadores', JugadorController::class)
         ->parameters(['jugadores' => 'jugador']);
+
+    Route::resource('partidos', PartidoController::class)
+        ->parameters(['partidos' => 'partido']);
+    Route::get('partidos/{partido}/resultado', [PartidoController::class, 'resultado'])
+        ->name('partidos.resultado');
+    Route::patch('partidos/{partido}/resultado', [PartidoController::class, 'guardarResultado'])
+        ->name('partidos.guardarResultado');
 });

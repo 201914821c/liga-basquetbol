@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Equipo;
+use App\Models\Partido;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -64,6 +65,25 @@ class EquipoTest extends TestCase
             ->assertRedirect('/equipos');
 
         $this->assertDatabaseMissing('equipos', ['id' => $equipo->id]);
+    }
+
+    public function test_team_with_matches_cannot_be_deleted(): void
+    {
+        $user = User::factory()->create();
+        $local = Equipo::create(['nombre' => 'Tigres']);
+        $visitante = Equipo::create(['nombre' => 'Águilas']);
+        Partido::create([
+            'equipo_local_id' => $local->id,
+            'equipo_visitante_id' => $visitante->id,
+            'fecha' => '2026-11-10 18:00:00',
+            'estado' => 'programado',
+        ]);
+
+        $this->actingAs($user)->delete('/equipos/'.$local->id)
+            ->assertRedirect('/equipos')
+            ->assertSessionHas('error');
+
+        $this->assertDatabaseHas('equipos', ['id' => $local->id]);
     }
 
     public function test_team_name_must_be_unique(): void
